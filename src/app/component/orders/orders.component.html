@@ -1,0 +1,11 @@
+<div class="container">
+    <h2>Orders</h2>
+    <div class="row">
+        <ng-container *ngFor="let order of orderList">
+            <div class="order-item col-md-3">
+                <h3>Order {{order.id}}</h3>
+                <button class="btn btn-primary" (click)=redirectToDetailsPage(order.id)>View Details</button>
+            </div>
+        </ng-container>
+    </div>
+</div>

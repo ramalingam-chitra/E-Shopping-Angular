@@ -6,9 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { CartComponent } from './component/cart/cart.component';
 import { ProductsComponent } from './component/products/products.component';
+import { OrderListComponent } from './component/orders/orders.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FilterPipe } from './shared/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon'
+import { ProductListComponent } from './component/productlist/productlist.component';
+import { ModalPopupService } from './service/modalPopup.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,16 +21,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     CartComponent,
     ProductsComponent,
-    FilterPipe
+    OrderListComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [ModalPopupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
