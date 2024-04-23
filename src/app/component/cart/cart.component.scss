@@ -46,3 +46,13 @@ h6 {
     padding: 12px 72px;
     border-radius: 3px !important;
 }
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.icon {
+    padding: 5px;
+    margin-top: -5px;
+    font-size: 10px;
+}

@@ -1,4 +1,4 @@
-export const products =  [
+export const allProducts =  [
   {
     "id": "A101",
     "description": "Screwdriver",

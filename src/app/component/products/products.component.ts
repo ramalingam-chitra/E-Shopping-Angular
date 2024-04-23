@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
-import { products } from 'src/app/shared/data/products';
+import { allProducts } from 'src/app/shared/data/products';
+import { Output, EventEmitter } from '@angular/core';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -9,15 +11,18 @@ import { products } from 'src/app/shared/data/products';
 export class ProductsComponent implements OnInit {
 
   public productList : any ;
+  @Output() selectedProduct = new EventEmitter<{}>();
+
   constructor(private cartService : CartService) { }
 
   ngOnInit(): void {
-    this.productList = products;
+    this.productList = allProducts;
       console.log(this.productList)
 
   }
   addtocart(item: any){
-    this.cartService.addtoCart(item);
+    //this.cartService.addtoCart(item);
+    this.selectedProduct.emit(item);
   }
  
 

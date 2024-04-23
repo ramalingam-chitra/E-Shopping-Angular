@@ -9,6 +9,54 @@ export class CartService {
   public cartItemList : any =[]
   public productList = new BehaviorSubject<any>([]);
   public search = new BehaviorSubject<string>("");
+  public orderList = new BehaviorSubject<any>([]);
+  public orders: any  =  [
+    {
+      "id": "1",
+      "customerId": "1",
+      "items": [
+        {
+          "productId": "B102",
+          "quantity": 10,
+          "unitPrice": 4.99,
+          "total": 49.90
+        }
+      ],
+      "total": 49.90
+    },
+    {
+      "id": "2",
+      "customerId": "2",
+      "items": [
+        {
+          "productId": "B102",
+          "quantity": 5,
+          "unitPrice": 4.99,
+          "total": 24.95
+        }
+      ],
+      "total": 24.95
+    },
+    {
+      "id": "3",
+      "customerId": "3",
+      "items": [
+        {
+          "productId": "A101",
+          "quantity": 2,
+          "unitPrice": 9.75,
+          "total": 19.50
+        },
+        {
+          "productId": "A102",
+          "quantity": 1,
+          "unitPrice": 49.50,
+          "total": 49.50
+        }
+      ],
+      "total": 69.00
+    }
+  ]
 
   constructor() { }
 
@@ -16,33 +64,23 @@ export class CartService {
     return this.productList.asObservable();
   }
 
-  setProduct(product : any){
-    this.cartItemList.push(...product);
-    this.productList.next(product);
-  }
-  addtoCart(product : any){
-    this.cartItemList.push(product);
-    this.productList.next(this.cartItemList);
-    this.getTotalPrice();
-    console.log(this.cartItemList)
-  }
-  getTotalPrice() : number{
-    let grandTotal = 0;
-    this.cartItemList.map((a:any)=>{
-      grandTotal += a.price;
+  updateOrders(updatedProducts : any, orderId: any){
+    this.orders.map((a:any)=>{
+      if(orderId === a.id){
+        this.orders.items = [];
+        this.orders.items.push(...[updatedProducts]);
+        this.orderList.next(a);
+      }
+      return this.orderList.asObservable();
     })
-    return grandTotal;
   }
-  removeCartItem(product: any){
-    this.cartItemList.map((a:any, index:any)=>{
-      if(product.id=== a.id){
-        this.cartItemList.splice(index,1);
+
+  getOrderDetails(id: any) : any{
+    this.orders.map((a:any)=>{
+      if(id=== a.id){
+        this.orderList.next(a);
       }
     })
-    this.productList.next(this.cartItemList);
-  }
-  removeAllCart(){
-    this.cartItemList = []
-    this.productList.next(this.cartItemList);
+    return this.orderList.asObservable();
   }
 }
