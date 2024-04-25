@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/service/cart.service';
 import { allProducts } from 'src/app/shared/data/products';
 import { Output, EventEmitter } from '@angular/core';
 
@@ -13,17 +12,19 @@ export class ProductsComponent implements OnInit {
   public productList : any ;
   @Output() selectedProduct = new EventEmitter<{}>();
 
-  constructor(private cartService : CartService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.productList = allProducts;
-      console.log(this.productList)
-
+    this.productList = allProducts; //Get the const data from mock file instead of api
   }
+
+  /* Function: addtocart
+   * Desc: Emit the selected product details to the parent component Cart screen to update the cart
+   * Params: Selected item
+   * Return: none
+   */
   addtocart(item: any){
-    //this.cartService.addtoCart(item);
     this.selectedProduct.emit(item);
   }
  
-
 }

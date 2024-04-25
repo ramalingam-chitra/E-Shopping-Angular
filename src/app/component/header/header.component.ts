@@ -8,19 +8,16 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public totalItem : number = 0;
-  public searchTerm !: string;
-  constructor(private cartService : CartService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.cartService.getProducts()
-    .subscribe(res=>{
-      this.totalItem = res.length;
-    })
-  }
-  search(event:any){
-    this.searchTerm = (event.target as HTMLInputElement).value;
-    console.log(this.searchTerm);
-    this.cartService.search.next(this.searchTerm);
+  ngOnInit() {}
+  
+  /* Function: logout
+  * Desc: Ask for user confirmation and logout of application
+  * Params: none
+  * Return: none
+  */
+  logout() {
+    window.alert("You have items in your cart, do you want to logout without placing order?")
   }
 }

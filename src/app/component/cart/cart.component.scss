@@ -1,6 +1,6 @@
 .card {
     height: 60vh;
-    margin: 25px;
+    margin: 50px;
     padding: 25px;
 }
 
@@ -27,7 +27,7 @@ h6 {
     text-align: center;
 }
 
-.card-table {
+.cart-table {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -37,6 +37,7 @@ h6 {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: .25rem;
+    margin: 50px;
 }
 
 .center .btn {

@@ -10,8 +10,6 @@ import { OrderListComponent } from './component/orders/orders.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
-import { ProductListComponent } from './component/productlist/productlist.component';
-import { ModalPopupService } from './service/modalPopup.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,7 +20,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CartComponent,
     ProductsComponent,
     OrderListComponent,
-    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatDialogModule
   ],
-  providers: [ModalPopupService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

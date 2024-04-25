@@ -8,15 +8,19 @@ import {orders} from 'src/app/shared/data/orders'
   styleUrls: ['./orders.component.scss']
 })
 export class OrderListComponent implements OnInit {
-  
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   orderList : any [] = [];
+
   ngOnInit(): void {
     this.orderList = orders;
-    console.log("order data : ", orders)
   }
-  redirectToDetailsPage(orderId: string) {
-    //this.router.navigate(["cart"]);
+
+  /* Function: redirectToDetailsPage
+   * Desc: Redirect to the details page when view details button is clicked in order list screen
+    * Params: none
+   * Return: none
+   */
+  redirectToDetailsPage(orderId: any) {
    this.router.navigate(["cart"], {
       queryParams: { id: orderId},
     });

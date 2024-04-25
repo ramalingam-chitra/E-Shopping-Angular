@@ -22,4 +22,16 @@ describe('ProductsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should check if addToCart emits the selected product details', () => {
+    const emitSpy = spyOn(component.selectedProduct, 'emit');
+    component.addtocart({
+      "id": "A101",
+      "description": "Screwdriver",
+      "category": "1",
+      "price": 9.75,
+      "image":"assets/img/screwdriver.jpeg"
+    },)
+    expect(emitSpy).toHaveBeenCalled();    
+  });
 });
