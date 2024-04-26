@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon'
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CartComponent,
     ProductsComponent,
     OrderListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,11 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartMockService {
-
-  public cartItemList : any =[]
+  public cartItemList: any = []
   public productList = new BehaviorSubject<any>([]);
   public search = new BehaviorSubject<string>("");
   public orderList = new BehaviorSubject<any>([]);
-  public orders: any  =  [
+  public orders: any = [
     {
       "id": "1",
       "customerId": "1",
@@ -65,21 +64,39 @@ export class CartMockService {
    * Params: none
    * Return: none
    */
-  getProducts(){
+  getProducts() {
     return this.productList.asObservable();
   }
 
-  /* Function: getOrderDetails
+  /* Function: getOrderDetailsById
    * Desc: Send the order details based on given id as observable
    * Params: Id of the selected order
    * Return: none
    */
-  getOrderDetails(id: any) : any{
-    this.orders.map((a:any)=>{
-      if(id=== a.id){
+  getOrderDetailsById(id: any): any {
+    this.orders.map((a: any) => {
+      if (id === a.id) {
         this.orderList.next(a);
       }
     })
     return this.orderList.asObservable();
+  }
+
+  /* Function: getOrderDetailsById
+   * Desc: Save the order details when the save button is clicked. 
+           Routing within application without page refresh will give latest data in cart component
+   * Params: Products in the cart, Id of the selected order
+   * Return: none
+   */
+  saveOrder(products: any, orderId: any) {
+    let selectedOrder = this.orders.find((order: { id: any }) => order.id === orderId);
+    selectedOrder.items.map((orderItems: any) => {
+      products.map((product: any) => {
+        if (orderItems.id === product.productId) {
+          orderItems.total = product.total;
+          orderItems.quantity = product.quanity;
+        }
+      })
+    })
   }
 }

@@ -43,7 +43,7 @@ describe('CartComponent', () => {
 
   it('should check oninit mapproductdetails is called', () => {
     const mapproductdetailsSpy = spyOn(component, 'mapProductDetails');
-    spyOn(cartService, 'getOrderDetails').and.returnValue(
+    spyOn(cartService, 'getOrderDetailsById').and.returnValue(
       of(JSON.stringify(ordersMockData[0])));
       cartService.orderList.next( ordersMockData[0]);
     expect(mapproductdetailsSpy).toHaveBeenCalled();
@@ -101,4 +101,11 @@ describe('CartComponent', () => {
     component.redirectToOrders();
     expect(spyRouter).toHaveBeenCalledWith(["orders"]);
   });
+
+  it('should check save order calls the saveorder method in cart service', () => {
+    const saveOrderSpy = spyOn(cartService, 'saveOrder');
+    component.saveOrder();
+    expect(saveOrderSpy).toHaveBeenCalled();
+  });
+
 });

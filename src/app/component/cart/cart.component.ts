@@ -25,9 +25,9 @@ export class CartComponent implements OnInit {
     //Call the service and get the dummy data which can be replaced by actual api endpoints
     this.cartService.getOrderDetailsById(this.orderId)
       .subscribe((res: any) => {
+        this.products = [];
         this.products.push(...res.items);
         this.mapProductDetails();
-        this.grandTotal = res.total;
       }, (err: any) => {
         console.log("An error is encourtered while fetching data", err);
       })
@@ -61,6 +61,7 @@ export class CartComponent implements OnInit {
         }
       })
     })
+    this.getTotalPrice();
   }
 
   /* Function: removeItem
@@ -86,6 +87,7 @@ export class CartComponent implements OnInit {
     this.products = [];
     this.grandTotal = 0;
     this.shopMore = false;
+    this.cartService.saveOrder([],this.orderId);
   }
 
   /* Function: addMore
@@ -103,7 +105,6 @@ export class CartComponent implements OnInit {
   * Return: none
   */
   incrementQty(item: any) {
-    console.log("item : ", item)
     this.products.map((a: any) => {
       if (item.productId === a.productId) {
         a.quantity++;
@@ -158,13 +159,13 @@ export class CartComponent implements OnInit {
   }
 
   /* Function: saveOrder
-  * Desc: Save the order before checkout
+  * Desc: call the saveOrder method in cartService
   * Params: none
   * Return: none
   */
   saveOrder() {
-    this.orders = this.cartService.getOrdersList();
-    console.log("orders : ", this.orders);
+    this.cartService.saveOrder(this.products, this.orderId);
+    window.alert("Changes saved successfully");
   }
   /* Function: placeOrder
   * Desc: Place the order if there is atleast one item in cart
