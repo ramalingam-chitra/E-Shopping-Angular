@@ -1,13 +1,15 @@
 <ng-container class="card">
     <h3 class="title">E-Shopping</h3>
-    <form class="login-form">
+    <form class="login-form" [formGroup]="loginForm">
         <div class="form-group">
           <label>Email address</label>
-          <input required type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+          <input [formControl]="$any(loginForm).controls.email" required type="email" class="form-control is-valid" placeholder="Enter email">
+          <span class="error" *ngIf="showError">Please fill email</span>
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input required type="password" class="form-control" placeholder="Password">
+          <input [formControl]="$any(loginForm).controls.password" required type="password" class="form-control" placeholder="Password">
+          <span class="error" *ngIf="showPwdError">Please fill password</span>
         </div>
         <button type="submit" (click)="redirectToOrders()" class="submit-btn btn btn-primary">Submit</button>
       </form>
