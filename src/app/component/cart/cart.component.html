@@ -1,5 +1,5 @@
 <ng-container *ngIf="products.length !=0">
-    <button (click)="redirectToOrders()" class="btn"><a>Go To Orders</a></button>
+    <button (click)="redirectToOrders()" class="btn"><a>Back To Orders</a></button>
     <div class="container">
         <h5 class="
         card-title">My Cart</h5>
@@ -32,12 +32,13 @@
                         <tr>
                             <td colspan="4"></td>
                             <td style="width: 70%;"><strong>Grand Total : € {{grandTotal}}</strong></td>
+                            <td style="width: 5%;"><button [disabled]="products.length === 0" (click)="placeOrder()" class="place-order btn btn-success">Place Order</button></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
-                            <td style="width: 5%;"><button id="emptyCartBtn" (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
                             <td style="width: 5%;"><button (click)="addMore()" class="btn btn-primary">Shop More</button></td>
-                            <td style="width: 5%;"><button [disabled]="products.length === 0" (click)="placeOrder()" class="btn btn-success">Place Order</button></td>
+                            <td style="width: 5%;"><button id="emptyCartBtn" (click)="emptycart()" class="btn btn-danger">Empty Cart</button></td>
+                            <td style="width: 5%;"><button [disabled]="products.length === 0" (click)="saveOrder()" class="btn btn-secondary">Save Order</button></td>
                         </tr>
                     </tbody>
                 </table>

@@ -69,17 +69,26 @@ export class CartService {
     return this.productList.asObservable();
   }
 
-  /* Function: getOrderDetails
+  /* Function: getOrderDetailsById
    * Desc: Send the order details based on given id as observable
    * Params: Id of the selected order
    * Return: none
    */
-  getOrderDetails(id: any) : any{
+  getOrderDetailsById(id: any) : any{
     this.orders.map((a:any)=>{
       if(id=== a.id){
         this.orderList.next(a);
       }
     })
     return this.orderList.asObservable();
+  }
+
+  /* Function: getOrderDetailsById
+   * Desc: Send the order details based on given id as observable
+   * Params: Id of the selected order
+   * Return: none
+   */
+  getOrdersList() : any{
+    return this.orders;
   }
 }

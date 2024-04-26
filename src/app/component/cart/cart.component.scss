@@ -4,6 +4,11 @@
     padding: 25px;
 }
 
+.card-title {
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
 .center img {
     text-decoration: none;
     color: inherit;
@@ -37,7 +42,7 @@ h6 {
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: .25rem;
-    margin: 50px;
+    margin: 30px;
 }
 
 .center .btn {
@@ -56,4 +61,8 @@ h6 {
     padding: 5px;
     margin-top: -5px;
     font-size: 10px;
+}
+
+.place-order {
+    margin-left: -60px !important;
 }

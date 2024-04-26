@@ -15,6 +15,7 @@ export class CartComponent implements OnInit {
   orderId: string | null | undefined;
   orderDetails: any;
   productDetails: any;
+  orders: any;
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -22,7 +23,7 @@ export class CartComponent implements OnInit {
       this.orderId = paramMap.get('id');
     })
     //Call the service and get the dummy data which can be replaced by actual api endpoints
-    this.cartService.getOrderDetails(this.orderId)
+    this.cartService.getOrderDetailsById(this.orderId)
       .subscribe((res: any) => {
         this.products.push(...res.items);
         this.mapProductDetails();
@@ -42,7 +43,7 @@ export class CartComponent implements OnInit {
     this.products.map((a: any) => {
       total += Number(a.total);
     })
-    this.grandTotal = total;
+    this.grandTotal = Number(total.toFixed(2));
   }
 
   /* Function: mapProductDetails
@@ -59,13 +60,6 @@ export class CartComponent implements OnInit {
           b.image = a.image;
         }
       })
-    })
-    this.orderDetails = this.cartService.getOrderDetails(this.orderId);
-    this.cartService.getOrderDetails(this.orderId)
-    .subscribe((res: any)=>{
-      this.products.push(...res.items);
-      this.mapProductDetails();
-      this.grandTotal = res.total;
     })
   }
 
@@ -113,7 +107,7 @@ export class CartComponent implements OnInit {
     this.products.map((a: any) => {
       if (item.productId === a.productId) {
         a.quantity++;
-        a.total = Number(a.unitPrice * a.quantity).toFixed(2);
+        a.total = Number((a.unitPrice * a.quantity).toFixed(2));
       }
     })
     this.getTotalPrice();
@@ -131,7 +125,7 @@ export class CartComponent implements OnInit {
         if ((a.quantity) === 0) {
           this.removeItem(item);
         }
-        a.total = Number(a.unitPrice * a.quantity).toFixed(2);
+        a.total = Number((a.unitPrice * a.quantity).toFixed(2));
       }
     })
     this.getTotalPrice();
@@ -147,7 +141,7 @@ export class CartComponent implements OnInit {
     let existingProduct = this.products.find((product: { productId: any; }) => product.productId === newProduct.id)
     if (existingProduct !== undefined) {
       existingProduct.quantity++;
-      existingProduct.total = (existingProduct.quantity * existingProduct.unitPrice).toFixed(2);
+      existingProduct.total = Number((existingProduct.quantity * existingProduct.unitPrice).toFixed(2));
       this.getTotalPrice();
     } else {
       allProducts.map((a: any) => {
@@ -155,7 +149,7 @@ export class CartComponent implements OnInit {
           newProduct.unitPrice = newProduct.price;
           newProduct.productId = newProduct.id;
           newProduct.quantity = 1;
-          newProduct.total = (a.unitPrice * a.quantity).toFixed(2);
+          newProduct.total = Number((a.unitPrice * a.quantity).toFixed(2));
         }
       })
       this.products.push(...[newProduct]);
@@ -163,6 +157,15 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /* Function: saveOrder
+  * Desc: Save the order before checkout
+  * Params: none
+  * Return: none
+  */
+  saveOrder() {
+    this.orders = this.cartService.getOrdersList();
+    console.log("orders : ", this.orders);
+  }
   /* Function: placeOrder
   * Desc: Place the order if there is atleast one item in cart
   * Params: none
