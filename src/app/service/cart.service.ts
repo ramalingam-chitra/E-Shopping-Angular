@@ -100,9 +100,6 @@ export class CartService {
         }
       })
     }
-
-    console.log("selectedOrder: ", selectedOrder)
-    console.log("orders : ", this.orders);
   }
 
 }
